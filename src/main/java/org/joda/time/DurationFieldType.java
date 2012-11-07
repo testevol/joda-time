@@ -260,24 +260,6 @@ public abstract class DurationFieldType implements Serializable {
             iOrdinal = ordinal;
         }
 
-        /** @inheritdoc */
-        @Override
-        public boolean equals(Object obj) {
-            if (this == obj) {
-                return true;
-            }
-            if (obj instanceof StandardDurationFieldType) {
-                return iOrdinal == ((StandardDurationFieldType) obj).iOrdinal;
-            }
-            return false;
-        }
-
-        /** @inheritdoc */
-        @Override
-        public int hashCode() {
-            return (1 << iOrdinal);
-        }
-
         public DurationField getField(Chronology chronology) {
             chronology = DateTimeUtils.getChronology(chronology);
             
@@ -348,5 +330,6 @@ public abstract class DurationFieldType implements Serializable {
                     return this;
             }
         }
+
     }
 }

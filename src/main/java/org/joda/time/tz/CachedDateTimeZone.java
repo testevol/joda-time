@@ -1,5 +1,5 @@
 /*
- *  Copyright 2001-2012 Stephen Colebourne
+ *  Copyright 2001-2005 Stephen Colebourne
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -81,11 +81,19 @@ public class CachedDateTimeZone extends DateTimeZone {
 
     private final DateTimeZone iZone;
 
-    private final Info[] iInfoCache = new Info[cInfoCacheMask + 1];
+    private transient Info[] iInfoCache;
 
     private CachedDateTimeZone(DateTimeZone zone) {
         super(zone.getID());
         iZone = zone;
+        iInfoCache = new Info[cInfoCacheMask + 1];
+    }
+
+    private void readObject(java.io.ObjectInputStream in)
+        throws java.io.IOException, ClassNotFoundException
+    {
+        in.defaultReadObject();
+        iInfoCache = new Info[cInfoCacheMask + 1];
     }
 
     /**

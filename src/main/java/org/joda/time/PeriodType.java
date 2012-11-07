@@ -569,10 +569,10 @@ public class PeriodType implements Serializable {
         PeriodType checkPartType = new PeriodType(null, type.iTypes, null);
         PeriodType checkedType = (PeriodType) cache.get(checkPartType);
         if (checkedType != null) {
-            cache.put(checkPartType, checkedType);
+            cache.put(inPartType, checkedType);
             return checkedType;
         }
-        cache.put(checkPartType, type);
+        cache.put(inPartType, type);
         return type;
     }
 

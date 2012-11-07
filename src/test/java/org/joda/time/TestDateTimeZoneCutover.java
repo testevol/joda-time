@@ -1,5 +1,5 @@
 /*
- *  Copyright 2001-2012 Stephen Colebourne
+ *  Copyright 2001-2007 Stephen Colebourne
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -1229,7 +1229,6 @@ public class TestDateTimeZoneCutover extends TestCase {
         assertEquals(baseAfter.toString(), testAfter.toString());
     }
 
-    //-------------------------------------------------------------------------
     public void testBug3192457_adjustOffset() {
         final DateTimeZone zone = DateTimeZone.forID("Europe/Paris");
         DateTime base = new DateTime(2007, 10, 28, 3, 15, zone);
@@ -1238,77 +1237,23 @@ public class TestDateTimeZoneCutover extends TestCase {
         
         assertSame(base, base.withEarlierOffsetAtOverlap());
         assertSame(base, base.withLaterOffsetAtOverlap());
-        
         assertSame(baseBefore, baseBefore.withEarlierOffsetAtOverlap());
-        assertEquals(baseAfter, baseBefore.withLaterOffsetAtOverlap());
-        
         assertSame(baseAfter, baseAfter.withLaterOffsetAtOverlap());
+        
         assertEquals(baseBefore, baseAfter.withEarlierOffsetAtOverlap());
+        assertEquals(baseAfter, baseAfter.withLaterOffsetAtOverlap());
     }
-
-    public void testBug3476684_adjustOffset() {
-        final DateTimeZone zone = DateTimeZone.forID("America/Sao_Paulo");
-        DateTime base = new DateTime(2012, 2, 25, 22, 15, zone);
-        DateTime baseBefore = base.plusHours(1);  // 23:15 (first)
-        DateTime baseAfter = base.plusHours(2);  // 23:15 (second)
-        
-        assertSame(base, base.withEarlierOffsetAtOverlap());
-        assertSame(base, base.withLaterOffsetAtOverlap());
-        
-        assertSame(baseBefore, baseBefore.withEarlierOffsetAtOverlap());
-        assertEquals(baseAfter, baseBefore.withLaterOffsetAtOverlap());
-        
-        assertSame(baseAfter, baseAfter.withLaterOffsetAtOverlap());
-        assertEquals(baseBefore, baseAfter.withEarlierOffsetAtOverlap());
-    }
-
-    public void testBug3476684_adjustOffset_springGap() {
-      final DateTimeZone zone = DateTimeZone.forID("America/Sao_Paulo");
-      DateTime base = new DateTime(2011, 10, 15, 22, 15, zone);
-      DateTime baseBefore = base.plusHours(1);  // 23:15
-      DateTime baseAfter = base.plusHours(2);  // 01:15
-      
-      assertSame(base, base.withEarlierOffsetAtOverlap());
-      assertSame(base, base.withLaterOffsetAtOverlap());
-      
-      assertSame(baseBefore, baseBefore.withEarlierOffsetAtOverlap());
-      assertEquals(baseBefore, baseBefore.withLaterOffsetAtOverlap());
-      
-      assertSame(baseAfter, baseAfter.withLaterOffsetAtOverlap());
-      assertEquals(baseAfter, baseAfter.withEarlierOffsetAtOverlap());
-  }
 
     // ensure Summer time picked
     //-----------------------------------------------------------------------
-    public void testDateTimeCreation_athens() {
+    public void testDateTimeCreation_europe() {
         DateTimeZone zone = DateTimeZone.forID("Europe/Athens");
         DateTime base = new DateTime(2011, 10, 30, 3, 15, zone);
         assertEquals("2011-10-30T03:15:00.000+03:00", base.toString());
         assertEquals("2011-10-30T03:15:00.000+02:00", base.plusHours(1).toString());
     }
 
-    public void testDateTimeCreation_paris() {
-        DateTimeZone zone = DateTimeZone.forID("Europe/Paris");
-        DateTime base = new DateTime(2011, 10, 30, 2, 15, zone);
-        assertEquals("2011-10-30T02:15:00.000+02:00", base.toString());
-        assertEquals("2011-10-30T02:15:00.000+01:00", base.plusHours(1).toString());
-    }
-
-    public void testDateTimeCreation_london() {
-        DateTimeZone zone = DateTimeZone.forID("Europe/London");
-        DateTime base = new DateTime(2011, 10, 30, 1, 15, zone);
-        assertEquals("2011-10-30T01:15:00.000+01:00", base.toString());
-        assertEquals("2011-10-30T01:15:00.000Z", base.plusHours(1).toString());
-    }
-
-    public void testDateTimeCreation_newYork() {
-        DateTimeZone zone = DateTimeZone.forID("America/New_York");
-        DateTime base = new DateTime(2010, 11, 7, 1, 15, zone);
-        assertEquals("2010-11-07T01:15:00.000-04:00", base.toString());
-        assertEquals("2010-11-07T01:15:00.000-05:00", base.plusHours(1).toString());
-    }
-
-    public void testDateTimeCreation_losAngeles() {
+    public void testDateTimeCreation_us() {
         DateTimeZone zone = DateTimeZone.forID("America/Los_Angeles");
         DateTime base = new DateTime(2010, 11, 7, 1, 15, zone);
         assertEquals("2010-11-07T01:15:00.000-07:00", base.toString());

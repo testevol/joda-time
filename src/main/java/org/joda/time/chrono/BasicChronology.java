@@ -155,7 +155,7 @@ abstract class BasicChronology extends AssembledChronology {
         }
 
         FieldUtils.verifyValueBounds
-            (DateTimeFieldType.millisOfDay(), millisOfDay, 0, DateTimeConstants.MILLIS_PER_DAY - 1);
+            (DateTimeFieldType.millisOfDay(), millisOfDay, 0, DateTimeConstants.MILLIS_PER_DAY);
         return getDateMidnightMillis(year, monthOfYear, dayOfMonth) + millisOfDay;
     }
 

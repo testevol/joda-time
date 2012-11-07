@@ -472,7 +472,7 @@ public abstract class DateTimeFieldType implements Serializable {
         /** @inheritdoc */
         @Override
         public int hashCode() {
-            return (1 << iOrdinal);
+            return iOrdinal;
         }
 
         /** @inheritdoc */
